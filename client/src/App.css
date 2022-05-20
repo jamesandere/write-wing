@@ -339,7 +339,7 @@ ol li::marker {
 
 ol li {
   height: 100px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .trends {
