@@ -1,4 +1,4 @@
-import { posts } from "../data";
+import { categories, posts } from "../data";
 
 const Posts = () => {
   return (
@@ -25,7 +25,16 @@ const Posts = () => {
                 </div>
             ))}
         </div>
-        <div className="right"></div>
+        <div className="right">
+            <div className="right-cont">
+            <h2>Discover More Blogs</h2>
+            {categories?.map((category)=> (
+                <div>
+                    <p>{category.title}</p>
+                </div>
+            ))}
+            </div>
+        </div>
     </div>
   )
 }

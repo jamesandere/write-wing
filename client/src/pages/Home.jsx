@@ -1,3 +1,4 @@
+import Footer from "../components/Footer"
 import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
 import Posts from "../components/Posts"
@@ -9,6 +10,7 @@ const Home = () => {
         <Hero />
         <Trending />
         <Posts />
+        <Footer />
     </div>
   )
 }

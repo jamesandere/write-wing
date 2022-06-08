@@ -61,3 +61,42 @@ export const posts = [
         readTime: '5 min'
     },
 ];
+
+export const categories = [
+    {
+        id: 1,
+        title: 'Relationships',
+    },
+    {
+        id: 2,
+        title: 'Self',
+    },
+    {
+        id: 3,
+        title: 'Programming',
+    },
+    {
+        id: 4,
+        title: 'Data Science',
+    },
+    {
+        id: 5,
+        title: 'Productivity',
+    },
+    {
+        id: 6,
+        title: 'Machine Learning',
+    },
+    {
+        id: 7,
+        title: 'Politics',
+    },
+    {
+        id: 8,
+        title: 'Health',
+    },
+    {
+        id: 9,
+        title: 'Fantasy',
+    },
+];
