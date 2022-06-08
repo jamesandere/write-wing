@@ -47,6 +47,11 @@
   transform-origin: bottom left;
 }
 
+.nav-links a {
+  text-decoration: none;
+  color: #000814;
+}
+
 .nav-links button{
   background-color: #000814;
   color: white;
