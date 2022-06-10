@@ -1,13 +1,16 @@
 import { FaBloggerB, FaBars } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { useState } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Navbar = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="navbar">
+      <Link to="/">
       <div className="logo">W</div>
+      </Link>
       <>
         <input
           type="checkbox"
@@ -26,8 +29,10 @@ const Navbar = () => {
           <Link to="/create-post">
           <span>Write</span>
           </Link>
+          <Link to="/login">
           <span>Sign in</span>
-          <button>Register</button>
+          </Link>
+          <button onClick={()=>navigate("/register")}>Register</button>
         </div>
       </>
     </div>
