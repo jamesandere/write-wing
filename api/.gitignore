@@ -1,11 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+**/node_modules
+**/.env
 /.pnp
 .pnp.js
-
-**/.env
 
 # testing
 /coverage
@@ -15,16 +14,6 @@
 
 # misc
 .DS_Store
-
-# Dependency directories
-node_modules/
-
-# Optional npm cache directory
-.npm
-
-# dotenv environment variables file
-.env
-
 .env
 .env.local
 .env.development.local
