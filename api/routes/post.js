@@ -49,6 +49,15 @@ router.get('/', async (req, res)=> {
     } catch (error) {
         res.status(500).send(error);
     }
-})
+});
+
+router.delete('/:id', async (req, res)=> {
+    try {
+        await Post.findByIdAndDelete(req.params.id);
+        res.status(200).send("Successfully deleted post");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 
 module.exports = router;
