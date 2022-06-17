@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const register = require('./routes/register');
+const login = require('./routes/login');
 const posts = require('./routes/post');
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/register", register);
+app.use("/api/login", login);
 app.use("/api/posts", posts);
 
 app.listen(process.env.port || 5000, 
