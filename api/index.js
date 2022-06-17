@@ -3,7 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const posts = require('./routes/post')
+const register = require('./routes/register');
+const posts = require('./routes/post');
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ mongoose.connect(process.env.DB_URI)
 app.use(express.json());
 app.use(cors());
 
+app.use("/api/register", register);
 app.use("/api/posts", posts);
 
 app.listen(process.env.port || 5000, 
