@@ -1,7 +1,8 @@
 const router = require('express').Router();
+const { auth, isAdmin } = require('../middleware/auth');
 const Post = require('../models/post');
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', isAdmin, async (req, res) => {
     try {
         const updatedPost = await Post.findByIdAndUpdate(
             req.params.id, {
