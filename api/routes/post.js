@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { auth, isAdmin } = require('../middleware/auth');
+const cloudinary = require('../middleware/cloudinary');
 const Post = require('../models/post');
 const  User  = require('../models/user');
 
@@ -20,20 +21,26 @@ router.post('/', auth, async (req, res) => {
     const {userId, title, desc, body, image, categories} = req.body;
 
     try {
-        // const user = await User.findById(req.user.id);
-        // userId = req.user.id;
-        const newPost = new Post({
-            userId,
-            title,
-            desc,
-            body,
-            image,
-            categories
-        });
-        // console.log(req.user);
+        if(image){
+            const uploadRes = cloudinary.uploader.upload(image, {
+                upload_preset: "write-wing"
+            })
 
-        const savedPost = await newPost.save();
-        res.status(200).send(savedPost);
+            if(uploadRes){
+                const newPost = new Post({
+                    userId,
+                    title,
+                    desc,
+                    body,
+                    image: uploadRes,
+                    categories
+                });
+        
+                const savedPost = await newPost.save();
+                res.status(200).send(savedPost);
+            }
+        }
+        
     } catch (error) {
         res.status(500).send(error);
     }
