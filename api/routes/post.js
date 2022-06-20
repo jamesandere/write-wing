@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { auth, isAdmin } = require('../middleware/auth');
 const Post = require('../models/post');
+const  User  = require('../models/user');
 
 router.put('/:id', isAdmin, async (req, res) => {
     try {
@@ -15,17 +16,21 @@ router.put('/:id', isAdmin, async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    const {title, desc, body, image, categories} = req.body;
+router.post('/', auth, async (req, res) => {
+    const {userId, title, desc, body, image, categories} = req.body;
 
     try {
+        // const user = await User.findById(req.user.id);
+        // userId = req.user.id;
         const newPost = new Post({
+            userId,
             title,
             desc,
             body,
             image,
             categories
         });
+        // console.log(req.user);
 
         const savedPost = await newPost.save();
         res.status(200).send(savedPost);

@@ -1,14 +1,16 @@
-import { categories, posts } from "../data";
+import { useSelector } from "react-redux";
+import { categories} from "../data";
 
 const Posts = () => {
+    const {items:posts, fetchStatus} = useSelector((state)=> state.posts);
   return (
     <div className="posts-container">
         <div className="post-item">
             {posts.map((post)=> (
                 <div className="post-main">
                 <div className="author">
-                    <img src={post.author.image} />
-                    <h2>{post.author.name}</h2>
+                    <img src="https://miro.medium.com/fit/c/40/40/1*VzeT736_-1CbcNONy0KPxA.png" alt="name" />
+                    <h2>James Andere</h2>
                 </div>
                 <div className="post-deets">
                 <div className="post-content">
