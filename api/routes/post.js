@@ -17,12 +17,12 @@ router.put('/:id', isAdmin, async (req, res) => {
     }
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
     const {userId, title, desc, body, image, categories} = req.body;
 
     try {
         if(image){
-            const uploadRes = cloudinary.uploader.upload(image, {
+            const uploadRes = await cloudinary.uploader.upload(image, {
                 upload_preset: "write-wing"
             })
 

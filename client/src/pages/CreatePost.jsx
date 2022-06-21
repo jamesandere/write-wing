@@ -1,13 +1,58 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { postsCreate } from "../redux/postsSlice";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [image, setImage] = useState("");
+  const [body, setBody] = useState("");
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    
+    transformFile(file);
+  }
+
+  const transformFile = (file) => {
+    const reader = new FileReader();
+
+    if(file){
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImage(reader.result);
+      }
+    } else {
+      setImage("");
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      postsCreate({
+        title,
+        desc,
+        image,
+        body
+      })
+    );
+  }
+
   return (
     <Container>
-      <form>
-        <input type="text" placeholder="Title" />
-        <input type="text" placeholder="Description" />
-        <input type="file" />
-        <textarea placeholder="Write..." />
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Title" 
+        onChange={(e) => setTitle(e.target.value)} required />
+        <input type="text" placeholder="Description" 
+        onChange={(e) => setDesc(e.target.value)} required />
+        <input type="file" accept="image/**" 
+        onChange={handleImageUpload} required />
+        <textarea placeholder="Write..." 
+        onChange={(e) => setBody(e.target.value)} required />
         <button className="publish-btn">Publish</button>
       </form>
     </Container>

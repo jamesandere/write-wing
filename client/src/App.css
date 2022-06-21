@@ -336,6 +336,11 @@ ol li::marker {
   width: 100%;
 }
 
+.post-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .post-deets img {
   width: 150px;
   height: 100px;
