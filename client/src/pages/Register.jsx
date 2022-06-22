@@ -1,34 +1,53 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { StyledForm } from "../components/StyledForm";
+import { registerUser } from "../redux/authSlice";
 
 const Register = () => {
+  const auth = useSelector(state=> state.auth);
+  const dispatch = useDispatch();
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    emaiil: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(registerUser(user));
+  }
+
   return (
     <Container>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <h2>Register</h2>
         <div className="form-control">
           <label>First Name</label>
-          <input type="text" />
+          <input type="text" onChange={(e)=> setUser({...user, firstName: e.target.value})} />
         </div>
         <div className="form-control">
           <label>Last Name</label>
-          <input type="text" />
+          <input type="text" onChange={(e) => setUser({...user, lastName: e.target.value})} />
         </div>
         <div className="form-control">
           <label>Email</label>
-          <input type="email" />
+          <input type="email" onChange={(e) => setUser({...user, email: e.target.value})} />
         </div>
         <div className="form-control">
           <label>Password</label>
-          <input type="password" />
+          <input type="password" onChange={(e) => setUser({...user, password: e.target.value})} />
         </div>
         <div className="form-control">
           <label>Confirm Password</label>
           <input type="password" />
         </div>
         <button className="btn" type="submit">
-          Complete Registration
+          {auth.registerStatus === "pending" ? "Loading..." : 
+          "Complete Registration"}
         </button>
       </StyledForm>
     </Container>
