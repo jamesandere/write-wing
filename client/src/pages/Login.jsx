@@ -1,22 +1,50 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { StyledForm } from "../components/StyledForm";
+import { loginUser } from "../redux/authSlice";
 
 const Login = () => {
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if(auth._id){
+      navigate("/");
+    }
+  }, [auth._id, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(loginUser(user));
+  }
   return (
     <Container>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="form-control">
           <label>Email</label>
-          <input type="email" />
+          <input type="email" 
+          onChange={(e) => setUser({...user, email: e.target.value})} />
         </div>
         <div className="form-control">
           <label>Password</label>
-          <input type="password" />
+          <input type="password"
+          onChange={(e) => setUser({...user, password: e.target.value})}/>
         </div>
         <button className="btn" type="submit">
-          Sign In
+        {auth.loginStatus === "pending" ? "Loading..." : 
+          "Sign in"}
         </button>
+        {auth.loginStatus === "rejected" ? 
+        <p>{auth.loginError}</p>: null}
       </StyledForm>
     </Container>
   );
