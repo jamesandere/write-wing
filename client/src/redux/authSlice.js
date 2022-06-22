@@ -12,6 +12,8 @@ const initialState = {
     _id: '',
     registerStatus: '',
     registerError: '',
+    loginStatus: '',
+    loginError: '',
 }
 
 export const registerUser = createAsyncThunk(
@@ -28,6 +30,25 @@ export const registerUser = createAsyncThunk(
             localStorage.setItem("token", token.data);
 
             return token.data;
+        } catch (error) {
+            console.log(error.response.data);
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const loginUser = createAsyncThunk(
+    "auth/loginUser",
+    async (user, {rejectWithValue}) => {
+        try {
+            const response = await axios.post(`${url}/login`, {
+                email: user.email,
+                password: user.password,
+            });
+
+            localStorage.setItem("token", response.data);
+
+            return response.data;
         } catch (error) {
             console.log(error.response.data);
             return rejectWithValue(error.response.data);
@@ -71,6 +92,35 @@ const authSlice = createSlice({
                 ...state,
                 registerStatus: "rejected",
                 registerError: action.payload,
+            }
+        });
+
+        builder.addCase(loginUser.pending, (state, action) => {
+            return { ...state, loginStatus: "pending" };
+        });
+
+        builder.addCase(loginUser.fulfilled, (state, action) => {
+            if (action.payload) {
+                const user = jwtDecode(action.payload);
+
+                return {
+                    ...state,
+                    token: action.payload,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    _id: user._id,
+                    isAdmin: user.isAdmin,
+                    loginStatus: "success"
+                }
+            } else return state;
+        });
+
+        builder.addCase(loginUser.rejected, (state, action) => {
+            return {
+                ...state,
+                loginStatus: "rejected",
+                loginError: action.payload,
             }
         });
     }
