@@ -8,12 +8,19 @@ import { registerUser } from "../redux/authSlice";
 const Register = () => {
   const auth = useSelector(state=> state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     emaiil: "",
     password: "",
   });
+
+  useEffect(() => {
+    if(auth._id){
+      navigate("/");
+    }
+  }, [auth._id, navigate])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +56,8 @@ const Register = () => {
           {auth.registerStatus === "pending" ? "Loading..." : 
           "Complete Registration"}
         </button>
+        {auth.registerStatus === "rejected" ? 
+        <p>{auth.registerError}</p>: null}
       </StyledForm>
     </Container>
   );

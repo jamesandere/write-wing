@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer  from "./authSlice";
+import authReducer, { loadUser }  from "./authSlice";
 import postsReducer, {postsFetch} from "./postsSlice";
 
 export const store = configureStore({
@@ -10,3 +10,4 @@ export const store = configureStore({
 });
 
 store.dispatch(postsFetch());
+store.dispatch(loadUser(null));

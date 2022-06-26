@@ -22,7 +22,7 @@ export const postsCreate = createAsyncThunk(
   "posts/postsCreate",
   async (posts) => {
     try {
-      const response = await axios.post(`${url}/posts`, posts);
+      const response = await axios.post(`${url}/posts`, posts, setHeaders());
       return response?.data;
     } catch (error) {
       console.log(error);

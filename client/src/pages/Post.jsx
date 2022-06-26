@@ -35,7 +35,7 @@ const Post = () => {
         </div>
         <h1>{post.title}</h1>
         <h2>{post.desc}</h2>
-        <img className="post-img" src={post.image} alt={post.title} />
+        <img className="post-img" src={post.image?.url} alt={post.title} />
         <p className="story">
           {post.body}
         </p>

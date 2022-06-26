@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { StyledForm } from "../components/StyledForm";
 import { loginUser } from "../redux/authSlice";
 
 const Login = () => {
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -16,7 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     if(auth._id){
-      navigate("/");
+      navigate(from, { replace: true });
     }
   }, [auth._id, navigate]);
 

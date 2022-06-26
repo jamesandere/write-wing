@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { postsCreate } from "../redux/postsSlice";
 
 const CreatePost = () => {
+  const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState("");
@@ -32,14 +35,17 @@ const CreatePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(
-      postsCreate({
-        title,
-        desc,
-        image,
-        body
-      })
-    );
+    if(auth._id){
+      dispatch(
+        postsCreate({
+          userId: auth._id,
+          title,
+          desc,
+          image,
+          body
+        })
+      ).then(navigate("/"));
+    }
   }
 
   return (

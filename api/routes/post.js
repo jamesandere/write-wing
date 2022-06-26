@@ -17,7 +17,7 @@ router.put('/:id', isAdmin, async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {userId, title, desc, body, image, categories} = req.body;
 
     try {

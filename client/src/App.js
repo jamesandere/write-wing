@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import {ToastContainer} from 'react-toastify';
 import NotFound from './pages/NotFound';
+import RequireAuth from './components/RequireAuth';
+import Unauthorized from './pages/Unauthorized';
 
 function App() {
   return (
@@ -17,10 +19,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route element={<RequireAuth />}>
         <Route path="/create-post" element={<CreatePost />} />
+        </Route>
         <Route path="/post/:id" element={<Post />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />}/>
       </Routes>
       </BrowserRouter>

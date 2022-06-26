@@ -17,6 +17,7 @@
   top: 0;
   width: 100%;
   z-index: 3;
+  padding: 0 2rem;
 }
 
 .logo {
@@ -52,6 +53,12 @@
   color: #000814;
 }
 
+.logout {
+  text-decoration: none;
+  color: #000814;
+  cursor: pointer;
+}
+
 .nav-links button{
   background-color: #000814;
   color: white;
@@ -59,7 +66,7 @@
   border-radius: 99em;
   font-size: 14px;
   line-height: 20px;
-  margin: 0 2rem;
+  margin-left: 2rem;
   border: none;
   outline: none;
   cursor: pointer;
