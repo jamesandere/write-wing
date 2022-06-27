@@ -6,6 +6,7 @@ const cors = require('cors');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const posts = require('./routes/post');
+const users = require('./routes/user');
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cors());
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/posts", posts);
+app.use("/api/users", users);
 
 app.listen(process.env.port || 5000, 
     ()=> console.log(`Server started on port ${process.env.port}`));
