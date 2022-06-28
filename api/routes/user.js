@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { auth, isAdmin } = require('../middleware/auth');
 const User  = require('../models/user');
 const bcrypt = require('bcrypt');
+const Post  = require('../models/post');
 
 router.put("/:id", auth, async (req, res) => {
     if(req.body.password){
@@ -31,6 +32,15 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
+router.get("/:id/posts", auth, async (req, res) => {
+    try {
+        const posts = await Post.find({author: req.params.id});
+        res.status(200).send(posts);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 router.get("/:id", auth, async (req, res) => {
     try {
        const user = await User.findById(req.params.id);
@@ -40,11 +50,11 @@ router.get("/:id", auth, async (req, res) => {
     }
 });
 
-router.get('/', isAdmin, async (req, res) => {
+router.get('/', async (req, res) => {
     let qNew = req.query.new;
     try {
         const users = qNew ? await User.find().sort({_id: -1})
-        : await User.find();
+        : await User.find().populate("posts");
         res.status(200).send(users);
     } catch (error) {
         res.status(500).send(error);

@@ -18,7 +18,7 @@ router.put('/:id', isAdmin, async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-    const {userId, title, desc, body, image, categories} = req.body;
+    const {author, title, desc, body, image, categories} = req.body;
 
     try {
         if(image){
@@ -28,7 +28,7 @@ router.post('/', auth, async (req, res) => {
 
             if(uploadRes){
                 const newPost = new Post({
-                    userId,
+                    author: req.user._id,
                     title,
                     desc,
                     body,
@@ -48,7 +48,7 @@ router.post('/', auth, async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id).populate("author");
         res.status(200).send(post);
     } catch (error) {
         res.status(500).send(error);
@@ -57,8 +57,9 @@ router.get('/:id', async (req, res) => {
 
 router.get('/', async (req, res)=> {
     try {
-        const posts = await Post.find();
-        res.status(200).send(posts);
+        await Post.find().populate("author")
+        .then(p=>res.send(p))
+        .catch(error=>console.log(error));
     } catch (error) {
         res.status(500).send(error);
     }

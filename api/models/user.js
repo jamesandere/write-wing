@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
   },
   password: { type: String, required: true, minLength: 5, maxLength: 1024},
   avatar: { type: String, default: "" },
-  isAdmin: { type: Boolean, default: false}
+  isAdmin: { type: Boolean, default: false},
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+  }],
 });
 
 module.exports = mongoose.model('User', userSchema);
