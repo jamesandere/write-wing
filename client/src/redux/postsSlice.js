@@ -31,7 +31,7 @@ export const postsCreate = createAsyncThunk(
 );
 
 const postsSlice = createSlice({
-  name: "products",
+  name: "posts",
   initialState,
   reducers: {},
   extraReducers: {

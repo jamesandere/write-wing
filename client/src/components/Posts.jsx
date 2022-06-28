@@ -11,7 +11,7 @@ const Posts = () => {
                 <div className="post-main" key={post._id}>
                 <div className="author">
                     <img src="https://miro.medium.com/fit/c/40/40/1*VzeT736_-1CbcNONy0KPxA.png" alt="name" />
-                    <h2>James Andere</h2>
+                    <h2>{post?.author?.firstName + ' ' + post?.author?.lastName}</h2>
                 </div>
                 <div className="post-deets">
                 <div className="post-content">

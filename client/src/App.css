@@ -48,15 +48,62 @@
   transform-origin: bottom left;
 }
 
+.nav-links span:nth-child(3):hover::after{
+  transform: scaleX(0);
+}
+
+.nav-name span::after {
+  display: none;
+  transform: scaleX(0)
+}
+
 .navbar a, .nav-links a {
   text-decoration: none;
   color: #000814;
+}
+
+.nav-name {
+  cursor: pointer;
+  position: relative;
+}
+
+
+.nav-name span {
+  margin: 0;
+}
+
+.nav-name svg {
+  margin-left: 4px;
 }
 
 .logout {
   text-decoration: none;
   color: #000814;
   cursor: pointer;
+}
+
+.logout-menu {
+  position: absolute;
+  top: 30px;
+  left: -40px;
+  width: 130px;
+  border-radius: 2px;
+  background-color: white;
+  box-shadow: 8px 8px 11px -8px rgba(0,0,0,0.1);
+}
+
+.logout-menu-dropdown {
+  display: none;
+}
+
+.logout-menu ul {
+  list-style: none;
+}
+
+.logout-menu ul li {
+  text-align: center;
+  line-height: 40px;
+  color: #000814;
 }
 
 .nav-links button{
@@ -474,6 +521,32 @@ ol li::marker {
     border: none;
     border-radius: 0;
     outline: none;
+  }
+
+  .nav-name {
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .nav-name span {
+    display: inline-block;
+    padding: 0;
+  }
+
+  .logout-menu {
+    display: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* background-color: pink; */
+    transform: translateY(-40px);
+    box-shadow: none;
+  }
+
+  .logout-menu-dropdown {
+    transform: translateY(0);
+    display: block;
   }
 
   input[type=checkbox]:checked ~ .nav-links {

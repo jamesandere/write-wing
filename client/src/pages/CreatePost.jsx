@@ -38,7 +38,6 @@ const CreatePost = () => {
     if(auth._id){
       dispatch(
         postsCreate({
-          userId: auth._id,
           title,
           desc,
           image,
