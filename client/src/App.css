@@ -345,6 +345,7 @@ ol li::marker {
 .post-item .author h2 {
   font-size: 15px;
   font-weight: 400;
+  margin-left: 4px;
 }
 
 .post-item h3 {
@@ -390,7 +391,7 @@ ol li::marker {
   width: 100%;
 }
 
-.post-content a {
+.post-content a, .post-main a {
   text-decoration: none;
   color: inherit;
 }

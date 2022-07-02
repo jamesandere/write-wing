@@ -2,10 +2,9 @@ import { BsSearch } from "react-icons/bs";
 import styled from "styled-components";
 import { posts } from "../data";
 import {useState, useEffect} from "react";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { url } from "../redux/api";
 import axios from "axios";
-
 
 const Post = () => {
   const [post, setPost] = useState({});
@@ -24,9 +23,13 @@ const Post = () => {
     <Container>
       <div className="post-main-container">
         <div className="post-header">
+          <Link to={``}>
           <img src="https://miro.medium.com/fit/c/40/40/1*VzeT736_-1CbcNONy0KPxA.png" alt="andere" />
+          </Link>
           <div className="post-name">
+            <Link to={`/nash-jacobs/${post?.author?._id}`}>
             <h3>{post?.author?.firstName + " " + post?.author?.lastName}</h3>
+            </Link>
             <div className="post-durations">
               <p>{new Date(post.createdAt).toLocaleString('default', { month: 'long' })}</p>
               <p>8 min</p>
